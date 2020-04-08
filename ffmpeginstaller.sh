@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# FFMPEG Installer For CentOS 7 [CMM]
+# FFMPEG Installer For CentOS 7 and Centminmod
 
 # Scripted by Brijendra Sial @ Bullten Web Hosting Solutions [https://www.bullten.com]
 
