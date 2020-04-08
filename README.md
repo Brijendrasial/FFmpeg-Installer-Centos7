@@ -7,7 +7,7 @@ chmod 0777 ffmpeginstaller.sh <br>
 ./ffmpeginstaller.sh <br>
 <br>
 <br>
-<b>What is Installed</b>
+<b>What is Installed</b><br>
 CUDA_INSTALL<br>
 NVCODEC_INSTALL<br>
 NASM_INSTALL<br>
