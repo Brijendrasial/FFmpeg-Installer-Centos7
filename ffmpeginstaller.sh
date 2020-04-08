@@ -11,7 +11,7 @@ YELLOW='\e[93m'
 WHITE='\e[97m'
 BLINK='\e[5m'
 
-set -e
+#set -e
 #set -x
 
 CUDA_REPO="10.2.89-1"
