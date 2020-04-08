@@ -15,6 +15,7 @@ set -e
 #set -x
 
 CUDA_REPO="10.2.89-1"
+SDL2_VER="2.0.12"
 NASM_VER="2.14.02"
 LAME_VER="3.100"
 LIBOGG_VER="1.3.4"
@@ -147,6 +148,29 @@ make install PREFIX="$DEST_DIR"
 
 echo " "
 echo -e $YELLOW"NVCODEC Installation Completed"$RESET
+echo " "
+sleep 2
+}
+
+function SDL2_INSTALL
+{
+echo " "
+echo -e $GREEN"Starting SDL2 Installation"$RESET
+echo " "
+sleep 2
+
+#Install SDL2
+cd ${CHAN_DIR}
+curl -O -L http://www.libsdl.org/release/SDL2-${SDL2_VER}.tar.gz
+tar zxvf SDL2-${SDL2_VER}.tar.gz
+cd SDL2-${SDL2_VER}
+./configure --prefix="${DEST_DIR}" --bindir="${BIND_DIR}"
+make
+make install
+make distclean
+
+echo " "
+echo -e $YELLOW"SDL2 Installation Completed"$RESET
 echo " "
 sleep 2
 }
@@ -492,7 +516,7 @@ cd ffmpeg
 export TMPDIR=${TMP_DIR}
 mkdir -p $TMPDIR
 export PATH="${CUDA_DIR}/bin:$PATH"
-PKG_CONFIG_PATH="${DEST_DIR}/lib/pkgconfig" ./configure --prefix="${DEST_DIR}" --pkg-config-flags="--static" --extra-cflags="-I${DEST_DIR}/include -I${CUDA_DIR}/include" --extra-ldflags="-L${DEST_DIR}/lib -L${CUDA_DIR}/lib64" --extra-libs="-lpthread -lm" --bindir="${BIND_DIR}" --enable-gpl --enable-nonfree --enable-cuda --enable-cuda-nvcc --enable-cuvid --enable-vaapi --enable-libnpp --enable-gpl --enable-libfdk_aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libtheora --enable-libx265 --enable-libaom --enable-libass --enable-libfreetype --enable-nvenc --enable-libzimg
+PKG_CONFIG_PATH="${DEST_DIR}/lib/pkgconfig" ./configure --prefix="${DEST_DIR}" --pkg-config-flags="--static" --extra-cflags="-I${DEST_DIR}/include -I${CUDA_DIR}/include" --extra-ldflags="-L${DEST_DIR}/lib -L${CUDA_DIR}/lib64" --extra-libs="-lpthread -lm" --bindir="${BIND_DIR}" --enable-gpl --enable-nonfree --enable-cuda --enable-cuda-nvcc --enable-cuvid --enable-vaapi --enable-libnpp --enable-gpl --enable-libfdk_aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libtheora --enable-libx265 --enable-libaom --enable-libfribidi --enable-libass --enable-libfreetype --enable-nvenc --enable-libzimg --enable-ffplay
 make
 make install
 make distclean
@@ -577,6 +601,7 @@ sleep 2
 
 CUDA_INSTALL
 NVCODEC_INSTALL
+SDL2_INSTALL
 NASM_INSTALL
 YASM_INSTALL
 X264_INSTALL
