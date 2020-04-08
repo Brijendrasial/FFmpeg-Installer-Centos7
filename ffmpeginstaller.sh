@@ -79,7 +79,7 @@ echo " "
 sleep 2
 
 
-yum install autoconf automake unzip bzip2 bzip2-devel wget cmake cmake3 freetype-devel gcc gcc-c++ git libtool make mercurial pkgconfig zlib-devel numactl numactl-devel doxygen fribidi-devel libaom-devel libaom opencv opencv-devel libtheora-devel libvorbis-devel libva libva-devel graphviz fontconfig fontconfig-devel libdrm libdrm-devel -y
+yum install autoconf automake unzip bzip2 bzip2-devel wget cmake cmake3 freetype-devel gcc gcc-c++ git libtool make mercurial pkgconfig zlib-devel numactl numactl-devel doxygen fribidi-devel libaom-devel libaom opencv opencv-devel libtheora-devel libvorbis-devel libva libva-devel graphviz fontconfig fontconfig-devel libdrm libdrm-devel ruby rubygems ImageMagick ImageMagick-devel ImageMagick-perl -y
 
 echo " "
 echo -e $YELLOW"Required Dependencies Installed"$RESET
@@ -511,13 +511,68 @@ echo -e $GREEN"Starting QT-FASTSTART Installation"$RESET
 echo " "
 sleep 2
 
+#Install QTFASTSTART
 cd ${CHAN_DIR}/ffmpeg/tools
 make qt-faststart
 cp qt-faststart ${BIND_DIR}
 
 echo " "
-echo -e $YELLOW"Install QT-FASTSTART Completed"$RESET
+echo -e $YELLOW"QT-FASTSTART Installation Completed"$RESET
 echo " "
+sleep 2
+}
+
+function YOUTUBEDL_INSTALL
+{
+echo " "
+echo -e $GREEN"Starting YOUTUBE-DL Installation"$RESET
+echo " "
+sleep 2
+
+#Install YOUTUBEDL
+curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+chmod a+rx /usr/local/bin/youtube-dl
+
+echo " "
+echo -e $YELLOW"YOUTUBE-DL Installation Completed"$RESET
+echo " "
+sleep 2
+}
+
+function FLVTOOL2_INSTALL
+{
+echo " "
+echo -e $GREEN"Starting FLVTOOL2 Installation"$RESET
+echo " "
+sleep 2
+
+#Install FLVTOOL2
+gem install flvtool2
+
+echo " "
+echo -e $YELLOW"FLVTOOL2 Installation Completed"$RESET
+echo " "
+sleep 2
+}
+
+function MP4BOX_INSTALL
+{
+echo " "
+echo -e $GREEN"Starting MP4Box Installation"$RESET
+echo " "
+sleep 2
+
+cd ${CHAN_DIR}
+git clone https://github.com/gpac/gpac.git
+cd gpac
+./configure --static-mp4box --use-zlib=no
+make -j4
+sudo make install
+
+echo " "
+echo -e $YELLOW"MP4Box Installation Completed"$RESET
+echo " "
+sleep 2
 }
 
 CUDA_INSTALL
@@ -538,3 +593,6 @@ LIBASS_INSTALL
 ZIMG_INSTALL
 FFMPEG_INSTALL
 QTFASTSTART_INSTALL
+YOUTUBEDL_INSTALL
+FLVTOOL2_INSTALL
+MP4BOX_INSTALL
