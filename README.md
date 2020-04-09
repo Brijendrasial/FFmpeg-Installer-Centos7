@@ -1,7 +1,7 @@
-# FFmeg-Installer-Centos7
+# FFmpeg-Installer-Centos7 
 Install ffmpeg on centos 7
 
-git clone https://github.com/Brijendrasial/FFmeg-Installer-Centos7.git <br>
+git clone https://github.com/Brijendrasial/FFmpeg-Installer-Centos7.git <br>
 cd FFmeg-Installer-Centos7 <br>
 chmod 0777 ffmpeginstaller.sh <br>
 ./ffmpeginstaller.sh <br>
