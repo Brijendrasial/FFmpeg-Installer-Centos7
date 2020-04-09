@@ -31,4 +31,4 @@ YOUTUBEDL_INSTALL<br>
 FLVTOOL2_INSTALL<br>
 MP4BOX_INSTALL<br>
 <br>
-![](ffmpeg.png)
+![](ffmpeg-centos.png)
