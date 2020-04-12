@@ -11,7 +11,7 @@ YELLOW='\e[93m'
 WHITE='\e[97m'
 BLINK='\e[5m'
 
-#set -e
+set -e
 #set -x
 
 CUDA_REPO="10.2.89-1"
@@ -31,14 +31,14 @@ TMP_DIR="/home/tmp"
 VERSION_CHECK=`rpm -E %{rhel}`
 
 if [ "${VERSION_CHECK}" = '7' ]; then
-		echo " "
-		echo -e $GREEN"CentOS 7 Found. Starting Installation"$RESET
-		echo " "
+                echo " "
+                echo -e $GREEN"CentOS 7 Found. Starting Installation"$RESET
+                echo " "
 else
-		echo " "
-		echo -e $RED"Only CentOS 7 is Supported. Exiting Installation"$RESET
-		echo " "
-		exit
+                echo " "
+                echo -e $RED"Only CentOS 7 is Supported. Exiting Installation"$RESET
+                echo " "
+                exit
 fi
 
 echo " "
@@ -62,16 +62,16 @@ if  rpm -q epel-release > /dev/null ; then
         echo " "
         echo -e $YELLOW"EPEL Repository Installation Found. Skipping It"$RESET
         echo " "
-		sleep 2
+                sleep 2
 else
         echo " "
         echo -e $RED"EPEL Repository Installation Not Found. Installing It"$RESET
         echo " "
-		yum install epel-release -y
-		echo " "
-		echo -e $YELLOW"EPEL Repository Installation Completed"$RESET
-		echo " "
-		sleep 2
+                yum install epel-release -y
+                echo " "
+                echo -e $YELLOW"EPEL Repository Installation Completed"$RESET
+                echo " "
+                sleep 2
 fi
 
 echo " "
@@ -80,7 +80,7 @@ echo " "
 sleep 2
 
 
-yum install autoconf automake unzip bzip2 bzip2-devel wget cmake cmake3 freetype-devel gcc gcc-c++ git libtool make mercurial pkgconfig zlib-devel numactl numactl-devel doxygen fribidi-devel libaom-devel libaom opencv opencv-devel libtheora-devel libvorbis-devel libva libva-devel graphviz fontconfig fontconfig-devel libdrm libdrm-devel ruby rubygems ImageMagick ImageMagick-devel ImageMagick-perl -y
+yum install autoconf automake unzip bzip2 bzip2-devel wget cmake cmake3 freetype-devel gcc gcc-c++ git libtool make mercurial pkgconfig zlib-devel numactl numactl-devel doxygen fribidi-devel libaom-devel libaom opencv opencv-devel libtheora-devel libvorbis-devel libva libva-devel graphviz fontconfig fontconfig-devel libdrm libdrm-devel ruby rubygems -y
 
 echo " "
 echo -e $YELLOW"Required Dependencies Installed"$RESET
@@ -96,16 +96,16 @@ if  rpm -q nasm > /dev/null ; then
         echo " "
         echo -e $YELLOW"NASM Installation Found. Removing it"$RESET
         echo " "
-		yum remove nasm -y
-		echo " "
-		echo -e $YELLOW"Removal of NASM Completed"$RESET
-		echo " "
-		sleep 2
+                yum remove nasm -y
+                echo " "
+                echo -e $YELLOW"Removal of NASM Completed"$RESET
+                echo " "
+                sleep 2
 else
         echo " "
         echo -e $RED"NASM Installation Not Found"$RESET
         echo " "
-		sleep 2
+                sleep 2
 fi
 
 cat > /etc/ld.so.conf.d/ffmpeg.conf <<"EOF"
@@ -116,20 +116,53 @@ EOF
 rm -rf ${CHAN_DIR}
 mkdir -p ${CHAN_DIR}
 
+function IMAGEMAGIK_INSTALL
+{
+echo " "
+echo -e $GREEN"Checking ImageMagick Installation"$RESET
+echo " "
+sleep 2
+
+if  rpm -q ImageMagick > /dev/null ; then
+        echo " "
+        echo -e $YELLOW"ImageMagick Installation Found. Skipping it"$RESET
+        echo " "
+else
+        echo " "
+        echo -e $YELLOW"Starting ImageMagick Installation"$RESET
+        echo " "
+        yum install ImageMagick ImageMagick-devel ImageMagick-perl -y
+
+        echo " "
+        echo -e $YELLOW"ImageMagick Installation Completed"$RESET
+        echo " "
+        sleep 2
+fi
+}
+
 function CUDA_INSTALL
 {
 echo " "
-echo -e $GREEN"Starting CUDA Installation"$RESET
+echo -e $GREEN"Checking CUDA Installation"$RESET
 echo " "
 sleep 2
 
-rpm -ivh https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-${CUDA_REPO}.x86_64.rpm
-yum install cuda -y
+if  rpm -q cuda > /dev/null ; then
+        echo " "
+        echo -e $YELLOW"CUDA Installation Found. Skipping it"$RESET
+        echo " "
+else
+        echo " "
+        echo -e $YELLOW"Starting CUDA Installation"$RESET
+        echo " "
+        rpm -ivh https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-${CUDA_REPO}.x86_64.rpm
+        yum install cuda -y
 
-echo " "
-echo -e $YELLOW"CUDA Installation Completed"$RESET
-echo " "
-sleep 2
+        echo " "
+        echo -e $YELLOW"CUDA Installation Completed"$RESET
+        echo " "
+        sleep 2
+fi
 }
 
 function NVCODEC_INSTALL
@@ -599,6 +632,7 @@ echo " "
 sleep 2
 }
 
+IMAGEMAGIK_INSTALL
 CUDA_INSTALL
 NVCODEC_INSTALL
 SDL2_INSTALL
