@@ -9,6 +9,7 @@ chmod 0777 ffmpeginstaller.sh <br>
 <br>
 <br>
 <b>What is Installed</b><br>
+IMAGEMAGIK_INSTALL<br>
 CUDA_INSTALL<br>
 NVCODEC_INSTALL<br>
 SDL2_INSTALL<br>
@@ -33,3 +34,4 @@ FLVTOOL2_INSTALL<br>
 MP4BOX_INSTALL<br>
 <br>
 ![](ffmpeg-centos.png)
+![](mp4box.png)
