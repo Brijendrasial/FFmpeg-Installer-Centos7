@@ -222,6 +222,34 @@ echo " "
 sleep 2
 }
 
+function AOM_INSTALL
+{
+echo " "
+echo -e $GREEN"Starting AOM Installation"$RESET
+echo " "
+sleep 2
+
+#Install AOM
+cd ${CHAN_DIR}
+git clone https://aomedia.googlesource.com/aom
+mkdir -p aom/aom_build
+cd aom/aom_build
+cmake3 -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="${DEST_DIR}" -DENABLE_NASM=on ../../aom
+make
+make install
+
+rm -rf /usr/local/bin/aomdec
+rm -rf /usr/local/bin/aomenc
+
+ln -s /usr/local/ffmpeg/bin/aomdec /usr/local/bin/aomdec
+ln -s /usr/local/ffmpeg/bin/aomenc /usr/local/bin/aomenc
+
+echo " "
+echo -e $YELLOW"AOM Installation Completed"$RESET
+echo " "
+sleep 2
+}
+
 function X264_INSTALL
 {
 echo " "
@@ -263,34 +291,6 @@ ln -s /usr/local/ffmpeg/bin/x265 /usr/local/bin/x265
 
 echo " "
 echo -e $YELLOW"X265 Installation Completed"$RESET
-echo " "
-sleep 2
-}
-
-function AOM_INSTALL
-{
-echo " "
-echo -e $GREEN"Starting AOM Installation"$RESET
-echo " "
-sleep 2
-
-#Install AOM
-cd ${CHAN_DIR}
-git clone https://aomedia.googlesource.com/aom
-mkdir -p aom/aom_build
-cd aom/aom_build
-cmake3 -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="${DEST_DIR}" -DENABLE_NASM=on ../../aom
-make
-make install
-
-rm -rf /usr/local/bin/aomdec
-rm -rf /usr/local/bin/aomenc
-
-ln -s /usr/local/ffmpeg/bin/aomdec /usr/local/bin/aomdec
-ln -s /usr/local/ffmpeg/bin/aomenc /usr/local/bin/aomenc
-
-echo " "
-echo -e $YELLOW"AOM Installation Completed"$RESET
 echo " "
 sleep 2
 }
@@ -604,9 +604,9 @@ NVCODEC_INSTALL
 SDL2_INSTALL
 NASM_INSTALL
 YASM_INSTALL
+AOM_INSTALL
 X264_INSTALL
 X265_INSTALL
-AOM_INSTALL
 FDKACC_INSTALL
 MP3LAME_INSTALL
 OPUS_INSTALL
