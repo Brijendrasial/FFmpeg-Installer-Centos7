@@ -5,7 +5,7 @@ yum install git -y <br>
 git clone https://github.com/Brijendrasial/FFmpeg-Installer-Centos7.git <br>
 cd FFmpeg-Installer-Centos7 <br>
 chmod 0777 ffmpeginstaller.sh <br>
-./ffmpeginstaller.sh <br>
+./ffmpeginstaller.sh | tee /home/ffmpeg-install.log <br>
 <br>
 <br>
 <b>What is Installed</b><br>
