@@ -4,6 +4,7 @@
 
 # Scripted by Brijendra Sial @ Bullten Web Hosting Solutions [https://www.bullten.com]
 
+{
 RED='\033[01;31m'
 RESET='\033[0m'
 GREEN='\033[01;32m'
@@ -655,3 +656,8 @@ QTFASTSTART_INSTALL
 YOUTUBEDL_INSTALL
 FLVTOOL2_INSTALL
 MP4BOX_INSTALL
+} 2>&1 | tee /var/log/ffmpeginstaller.log
+
+echo " "
+echo -e $YELLOW"Your Installation log is saved at /var/log/ffmpeginstaller.log"$RESET
+echo " "
