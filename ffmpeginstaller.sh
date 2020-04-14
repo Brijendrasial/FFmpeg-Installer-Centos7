@@ -124,7 +124,7 @@ echo -e $GREEN"Checking ImageMagick Installation"$RESET
 echo " "
 sleep 2
 
-if  rpm -q ImageMagick > /dev/null ; then
+if  rpm -q ImageMagick > /dev/null || rpm -q ImageMagick6 > /dev/null ; then
         echo " "
         echo -e $YELLOW"ImageMagick Installation Found. Skipping it"$RESET
         echo " "
