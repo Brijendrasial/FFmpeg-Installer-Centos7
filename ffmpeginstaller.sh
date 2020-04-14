@@ -148,10 +148,11 @@ echo -e $GREEN"Checking CUDA Installation"$RESET
 echo " "
 sleep 2
 
-if  rpm -q cuda > /dev/null ; then
+if  rpm -q cuda-repo-rhel7 > /dev/null ; then
         echo " "
-        echo -e $YELLOW"CUDA Installation Found. Skipping it"$RESET
+        echo -e $YELLOW"CUDA Repository Found. Skipping it"$RESET
         echo " "
+        yum install cuda -y
 else
         echo " "
         echo -e $YELLOW"Starting CUDA Installation"$RESET
