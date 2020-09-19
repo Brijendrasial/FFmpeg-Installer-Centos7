@@ -288,7 +288,7 @@ sleep 2
 
 #Install X265
 cd ${CHAN_DIR}
-hg clone https://bitbucket.org/multicoreware/x265
+hg clone http://hg.videolan.org/x265
 cd x265/build/linux
 cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="${DEST_DIR}" -DENABLE_SHARED:bool=off ../../source
 make
