@@ -385,7 +385,7 @@ sleep 2
 
 #Install OPUS
 cd ${CHAN_DIR}
-git clone git://git.opus-codec.org/opus.git
+git clone https://gitlab.xiph.org/xiph/opus.git
 cd opus
 autoreconf -fiv
 ./configure --prefix="${DEST_DIR}" --disable-shared
