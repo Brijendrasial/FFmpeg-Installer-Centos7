@@ -81,7 +81,7 @@ echo " "
 sleep 2
 
 
-yum install autoconf automake unzip bzip2 bzip2-devel wget cmake cmake3 freetype-devel gcc gcc-c++ git libtool make mercurial pkgconfig zlib-devel numactl numactl-devel doxygen fribidi-devel libaom-devel libaom opencv opencv-devel libtheora-devel libvorbis-devel libva libva-devel graphviz fontconfig fontconfig-devel libdrm libdrm-devel ruby rubygems -y
+yum install autoconf automake unzip bzip2 bzip2-devel wget cmake cmake3 freetype-devel gcc gcc-c++ git libtool make mercurial pkgconfig zlib-devel numactl numactl-devel doxygen fribidi-devel libaom-devel libaom opencv opencv-devel libtheora-devel libvorbis-devel libva libva-devel graphviz fontconfig fontconfig-devel libdrm libdrm-devel ruby rubygems libXext-devel -y
 
 echo " "
 echo -e $YELLOW"Required Dependencies Installed"$RESET
