@@ -314,7 +314,7 @@ cd ${CHAN_DIR}
 git clone https://aomedia.googlesource.com/aom
 mkdir -p aom/aom_build
 cd aom/aom_build
-cmake3 -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="${DEST_DIR}" -DENABLE_NASM=on ../../aom
+cmake3 -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="${DEST_DIR}" -DCONFIG_AV1_ENCODER=0 -DENABLE_NASM=on ../../aom
 make
 make install
 
