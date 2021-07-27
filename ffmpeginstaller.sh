@@ -19,6 +19,7 @@ CUDA_REPO="10.2.89-1"
 SDL2_VER="2.0.12"
 NASM_VER="2.14.02"
 LAME_VER="3.100"
+OPUS_VER="1.3.1"
 LIBOGG_VER="1.3.4"
 LIBVORBIS_VER="1.3.6"
 LIBTHEORA_VER="1.1.1"
@@ -385,9 +386,11 @@ sleep 2
 
 #Install OPUS
 cd ${CHAN_DIR}
-git clone https://gitlab.xiph.org/xiph/opus.git
-cd opus
-autoreconf -fiv
+#git clone https://github.com/xiph/opus.git
+curl -L -O https://archive.mozilla.org/pub/opus/opus-${OPUS_VER}.tar.gz
+tar zxvf opus-${OPUS_VER}.tar.gz
+cd opus-${OPUS_VER}
+#autoreconf -fiv
 ./configure --prefix="${DEST_DIR}" --disable-shared
 make
 make install
@@ -522,14 +525,14 @@ echo " "
 sleep 2
 
 #Install ZIMG
-cd ${CHAN_DIR}
-git clone --depth=1 https://github.com/sekrit-twc/zimg
-cd zimg
-./autogen.sh
-./configure --prefix="${DEST_DIR}" --bindir="${BIND_DIR}" --disable-shared --with-pic
-make
-make install
-make distclean
+#cd ${CHAN_DIR}
+#git clone --depth=1 https://github.com/sekrit-twc/zimg
+#cd zimg
+#./autogen.sh
+#./configure --prefix="${DEST_DIR}" --bindir="${BIND_DIR}" --disable-shared --with-pic
+#make
+#make install
+#make distclean
 
 echo " "
 echo -e $YELLOW"ZIMG Installation Completed"$RESET
@@ -551,7 +554,7 @@ cd ffmpeg
 export TMPDIR=${TMP_DIR}
 mkdir -p $TMPDIR
 export PATH="${CUDA_DIR}/bin:$PATH"
-PKG_CONFIG_PATH="${DEST_DIR}/lib/pkgconfig" ./configure --prefix="${DEST_DIR}" --pkg-config-flags="--static" --extra-cflags="-I${DEST_DIR}/include -I${CUDA_DIR}/include" --extra-ldflags="-L${DEST_DIR}/lib -L${CUDA_DIR}/lib64" --extra-libs="-lpthread -lm" --bindir="${BIND_DIR}" --enable-gpl --enable-nonfree --enable-cuda --enable-cuda-nvcc --enable-cuvid --enable-vaapi --enable-libnpp --enable-gpl --enable-libfdk_aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libtheora --enable-libx265 --enable-libaom --enable-libfribidi --enable-libass --enable-libfreetype --enable-nvenc --enable-libzimg --enable-ffplay
+PKG_CONFIG_PATH="${DEST_DIR}/lib/pkgconfig" ./configure --prefix="${DEST_DIR}" --pkg-config-flags="--static" --extra-cflags="-I${DEST_DIR}/include -I${CUDA_DIR}/include" --extra-ldflags="-L${DEST_DIR}/lib -L${CUDA_DIR}/lib64" --extra-libs="-lpthread -lm" --bindir="${BIND_DIR}" --enable-gpl --enable-nonfree --enable-cuda --enable-cuda-nvcc --enable-cuvid --enable-vaapi --enable-libnpp --enable-gpl --enable-libfdk_aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libtheora --enable-libx265 --enable-libaom --enable-libfribidi --enable-libass --enable-libfreetype --enable-nvenc --enable-ffplay
 make
 make install
 make distclean
@@ -651,7 +654,7 @@ LIBVORBIS_INSTALL
 LIBVPX_INSTALL
 LIBTHEORA_INSTALL
 LIBASS_INSTALL
-ZIMG_INSTALL
+#ZIMG_INSTALL
 FFMPEG_INSTALL
 QTFASTSTART_INSTALL
 YOUTUBEDL_INSTALL
